@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from sarima_model import get_forecast_for_month  # Import the forecast function
 from datetime import datetime
+import os
+port = int(os.environ.get('PORT', 5000))
 
 app = Flask(__name__)
 
@@ -23,4 +25,4 @@ def predict():
         return jsonify({"error": str(e)}), 500
  
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=port)
